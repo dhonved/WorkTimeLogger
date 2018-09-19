@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WorkTimeLogger.ViewModel.Services;
-//using WorkTimeLogger.ViewModel.Commands;
+using WorkTimeLogger.ViewModel.Commands;
 
 namespace WorkTimeLogger
 {
@@ -27,9 +27,14 @@ namespace WorkTimeLogger
         #region Command Properties
 
         /// <summary>
-        /// Deletes the currently-selected item from the Grocery List.
+        /// Starts the counter for the currently selected item from the Workitem List.
         /// </summary>
-        //public ICommand DeleteItem { get; set; }
+        public ICommand StartWork { get; set; }
+
+        /// <summary>
+        /// Stops the counter for the item currently in progress from the Workitem List.
+        /// </summary>
+        public ICommand StopWork { get; set; }
 
         #endregion
 
@@ -95,7 +100,8 @@ namespace WorkTimeLogger
         private void Initialize()
         {
             // Initialize commands
-            //this.DeleteItem = new DeleteItemCommand(this);
+            this.StartWork = new StartCommand(this);
+            this.StopWork = new StopCommand(this);
 
             // Create workitem list
             p_WorkItemList = new ObservableCollection<WorkItem>();

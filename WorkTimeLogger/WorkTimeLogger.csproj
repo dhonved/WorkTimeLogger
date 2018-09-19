@@ -69,6 +69,8 @@
     <Compile Include="UtilityClasses\ISequencedObject.cs" />
     <Compile Include="UtilityClasses\ObservableObject.cs" />
     <Compile Include="UtilityClasses\ViewModelBase.cs" />
+    <Compile Include="ViewModel\Commands\StartCommand.cs" />
+    <Compile Include="ViewModel\Commands\StopCommand.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Services\SequencingService.cs" />
     <Compile Include="View\MainWindow.xaml.cs">

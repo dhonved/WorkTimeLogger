@@ -27,6 +27,30 @@
             <Setter Property="VerticalGridLinesBrush" Value="#FFD3D0" />
             <Setter Property="RowHeaderWidth" Value="0" />
         </Style>
+
+        <!--<Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Rectangle x:Name="background"
+                                   Fill="{TemplateBinding Background}"/>
+                                <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="background" Property="Opacity" Value="0.1"/>
+
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
     </Window.Resources>
 
     <DockPanel>
@@ -67,10 +91,40 @@
                 </Grid>
             </StatusBarItem>
             <StatusBarItem Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                <Button>Start</Button>
+                <Button Command="{Binding StartWork}" Content="Start">
+                    <!--<Button.Style>
+                        <Style>
+                            <Setter Property="Button.Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Border" Background="MediumSeaGreen" Opacity="50">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsEnabled" Value="false">
+                                                <Setter TargetName="Border" Property="Background" Value="DarkSeaGreen">
+                                                    --><!--<Setter.Value>
+                                                        <LinearGradientBrush>
+                                                            <GradientStop Color="DarkSeaGreen" Offset="0.0" />
+                                                            <GradientStop Color="DarkSeaGreen" Offset="0.6" />
+                                                            <GradientStop Color="DarkSeaGreen" Offset="1.0" />
+                                                        </LinearGradientBrush>
+                                                    </Setter.Value>--><!--
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Border" Property="Opacity" Value="20" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>-->
+                </Button>
             </StatusBarItem>
             <StatusBarItem Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                <Button>Stop</Button>
+                <Button Command="{Binding StopWork}">Stop</Button>
             </StatusBarItem>
         </StatusBar>
 

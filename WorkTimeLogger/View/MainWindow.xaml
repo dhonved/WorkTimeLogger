@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:WorkTimeLogger"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="WorkTimeLogger" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+        Title="WorkTimeLogger" Height="350" MinHeight="190" Width="525" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        
+
         <!-- DataGrid Background -->
         <LinearGradientBrush x:Key="BlueLightGradientBrush" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Offset="0" Color="#FFEAF3FF"/>
@@ -28,7 +28,7 @@
             <Setter Property="RowHeaderWidth" Value="0" />
         </Style>
     </Window.Resources>
-    
+
     <DockPanel>
         <DockPanel LastChildFill="False" DockPanel.Dock="Top" Margin="5,0,5,0">
             <TextBlock Text="Stories" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Cambria" FontSize="21.333">
@@ -37,22 +37,55 @@
                 </TextBlock.Foreground>
             </TextBlock>
         </DockPanel>
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <TextBlock Text="Number of items: " TextWrapping="NoWrap"/>
-            <TextBlock Text="{Binding ItemCount}" TextWrapping="Wrap"/>
-        </StackPanel>
+
+        <StatusBar DockPanel.Dock="Bottom" x:Name="StatusBar" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem Grid.Row="0" Grid.ColumnSpan="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Number of items: " TextWrapping="NoWrap"/>
+                    <TextBlock Grid.Column="1" Text="{Binding ItemCount}" TextWrapping="Wrap"/>
+                </Grid>
+            </StatusBarItem>
+            <StatusBarItem Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button>Start</Button>
+            </StatusBarItem>
+            <StatusBarItem Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button>Stop</Button>
+            </StatusBarItem>
+        </StatusBar>
 
         <DataGrid x:Name="MainGrid" 
                           ItemsSource="{Binding WorkItemList}" 
                           SelectedItem="{Binding SelectedItem}" 
                           AutoGenerateColumns="False" 
                           DockPanel.Dock="Top"
-                          DataContextChanged="OnMainGridDataContextChanged" >
+                          DataContextChanged="OnMainGridDataContextChanged"
+                          VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Width="63" Binding="{Binding WorkItemID}" IsReadOnly="false" />
                 <DataGridTextColumn Header="Work item" Width="*" Binding="{Binding Name}" IsReadOnly="false" />
             </DataGrid.Columns>
         </DataGrid>
-        
+
     </DockPanel>
 </Window>

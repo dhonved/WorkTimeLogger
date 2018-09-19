@@ -111,17 +111,6 @@ namespace WorkTimeLogger
             p_WorkItemList.Add(new WorkItem("Whipped Cream"));
             p_WorkItemList.Add(new WorkItem("Soft Drinks"));
             p_WorkItemList.Add(new WorkItem("Bread"));
-            p_WorkItemList.Add(new WorkItem("Ice Cream"));
-            p_WorkItemList.Add(new WorkItem("Chocolate Pudding"));
-            p_WorkItemList.Add(new WorkItem("Sliced Turkey"));
-            p_WorkItemList.Add(new WorkItem("Turkey Dressing"));
-            p_WorkItemList.Add(new WorkItem("Cranberry Sauce"));
-            p_WorkItemList.Add(new WorkItem("Swiss Cheese"));
-            p_WorkItemList.Add(new WorkItem("Mushrooms"));
-            p_WorkItemList.Add(new WorkItem("Butter"));
-            p_WorkItemList.Add(new WorkItem("Eggs"));
-            p_WorkItemList.Add(new WorkItem("Potatoes"));
-            p_WorkItemList.Add(new WorkItem("Onion"));
 
             // Initialize list index
             this.WorkItemList = SequencingService.SetCollectionSequence(this.WorkItemList);

@@ -133,11 +133,13 @@
                           SelectedItem="{Binding SelectedItem}" 
                           AutoGenerateColumns="False" 
                           DockPanel.Dock="Top"
+                          VerticalAlignment="Top"
                           DataContextChanged="OnMainGridDataContextChanged"
-                          VerticalAlignment="Top">
+                          SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Width="63" Binding="{Binding WorkItemID}" IsReadOnly="false" />
                 <DataGridTextColumn Header="Work item" Width="*" Binding="{Binding Name}" IsReadOnly="false" />
+                <DataGridTextColumn Header="Time spent" Width="*" Binding="{Binding TimeSpent}" IsReadOnly="true" />
             </DataGrid.Columns>
         </DataGrid>
 

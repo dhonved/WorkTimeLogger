@@ -46,6 +46,7 @@ namespace WorkTimeLogger.ViewModel.Commands
         public void Execute(object parameter)
         {
             m_ViewModel.ActiveItem = null;
+            m_ViewModel.dispatcherTimer.Stop();
         }
 
         #endregion

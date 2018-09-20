@@ -2,6 +2,8 @@
 using System.Windows.Input;
 using WorkTimeLogger.ViewModel.Services;
 using WorkTimeLogger.ViewModel.Commands;
+using System.Windows.Threading;
+using System;
 
 namespace WorkTimeLogger
 {
@@ -12,6 +14,9 @@ namespace WorkTimeLogger
         // Property variables
         private ObservableCollection<WorkItem> p_WorkItemList;
         private int p_ItemCount;
+        private string p_StatusBarMessage;
+
+        public DispatcherTimer dispatcherTimer = null;
 
         #endregion
 
@@ -20,6 +25,11 @@ namespace WorkTimeLogger
         public MainWindowViewModel()
         {
             this.Initialize();
+
+            //  DispatcherTimer setup
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
         }
 
         #endregion
@@ -78,6 +88,20 @@ namespace WorkTimeLogger
             }
         }
 
+        /// <summary>
+        /// The number of items in the workitem list.
+        /// </summary>
+        public string StatusBarMessage
+        {
+            get { return p_StatusBarMessage; }
+
+            set
+            {
+                p_StatusBarMessage = value;
+                base.RaisePropertyChangedEvent("StatusBarMessage");
+            }
+        }
+
         #endregion
 
         #region Event Handlers
@@ -92,6 +116,17 @@ namespace WorkTimeLogger
 
             // Resequence list
             SequencingService.SetCollectionSequence(this.WorkItemList);
+        }
+
+        /// <summary>
+        /// Updates the current seconds display 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            // Updating the active items time spent property
+            ActiveItem.TimeSpent = ActiveItem.TimeSpent.Add(new TimeSpan(0, 0, 1));
         }
 
         #endregion

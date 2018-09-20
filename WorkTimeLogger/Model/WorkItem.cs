@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace WorkTimeLogger
 {
     public class WorkItem : ObservableObject, ISequencedObject
@@ -8,6 +9,7 @@ namespace WorkTimeLogger
         // Property variables
         private int p_WorkItemID;
         private string p_Name;
+        private TimeSpan p_TimeSpent;
 
         #endregion
 
@@ -21,16 +23,17 @@ namespace WorkTimeLogger
         }
 
         /// <summary>
-        /// Paramterized constructor.
+        /// Parameterized constructor.
         /// </summary>
         /// <param name="itemName">The name of the work item.</param>
         public WorkItem(string itemName)
         {
             p_Name = itemName;
+            p_TimeSpent = new TimeSpan(0, 0, 0);
         }
 
         /// <summary>
-        /// Paramterized constructor.
+        /// Parameterized constructor.
         /// </summary>
         /// <param name="itemName">The name of the work item.</param>
         /// <param name="itemIndex">The sequential position of the item in a story list.</param>
@@ -38,6 +41,7 @@ namespace WorkTimeLogger
         {
             p_Name = itemName;
             p_WorkItemID = itemIndex;
+            p_TimeSpent = new TimeSpan(0, 0, 0);
         }
 
         #endregion
@@ -68,7 +72,21 @@ namespace WorkTimeLogger
             set
             {
                 p_Name = value;
-                base.RaisePropertyChangedEvent("Text");
+                base.RaisePropertyChangedEvent("Name");
+            }
+        }
+
+        /// <summary>
+        /// The time already spent on the work item.
+        /// </summary>
+        public TimeSpan TimeSpent
+        {
+            get { return p_TimeSpent; }
+
+            set
+            {
+                p_TimeSpent = value;
+                base.RaisePropertyChangedEvent("TimeSpent");
             }
         }
 

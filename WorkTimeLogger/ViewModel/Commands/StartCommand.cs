@@ -8,7 +8,7 @@ namespace WorkTimeLogger.ViewModel.Commands
         #region Fields
 
         // Member variables
-        private readonly MainWindowViewModel m_ViewModel;
+        private MainWindowViewModel m_ViewModel;
 
         #endregion
 
@@ -28,7 +28,7 @@ namespace WorkTimeLogger.ViewModel.Commands
         /// </summary>
         public bool CanExecute(object parameter)
         {
-            return (m_ViewModel.SelectedItem != null);
+            return (m_ViewModel.SelectedItem != null && m_ViewModel.ActiveItem == null);
         }
 
         /// <summary>
@@ -45,8 +45,7 @@ namespace WorkTimeLogger.ViewModel.Commands
         /// </summary>
         public void Execute(object parameter)
         {
-            var selectedItem = m_ViewModel.SelectedItem;
-            //m_ViewModel.WorkItemList.Remove(selectedItem);
+            m_ViewModel.ActiveItem = m_ViewModel.SelectedItem;
         }
 
         #endregion

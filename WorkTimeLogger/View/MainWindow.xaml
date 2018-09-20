@@ -91,7 +91,7 @@
                 </Grid>
             </StatusBarItem>
             <StatusBarItem Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                <Button Command="{Binding StartWork}" Content="Start">
+                <Button Command="{Binding StartWork}" Content="Start" ToolTip="Start the clock for the selected work item">
                     <!--<Button.Style>
                         <Style>
                             <Setter Property="Button.Template">
@@ -124,7 +124,7 @@
                 </Button>
             </StatusBarItem>
             <StatusBarItem Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                <Button Command="{Binding StopWork}">Stop</Button>
+                <Button Command="{Binding StopWork}" Content="Stop" ToolTip="Stop the clock"></Button>
             </StatusBarItem>
         </StatusBar>
 

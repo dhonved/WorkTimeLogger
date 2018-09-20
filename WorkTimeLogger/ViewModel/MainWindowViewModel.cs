@@ -55,14 +55,18 @@ namespace WorkTimeLogger
         }
 
         /// <summary>
-        /// The currently-selected grocery item.
+        /// The currently-selected work item.
         /// </summary>
         public WorkItem SelectedItem { get; set; }
 
         /// <summary>
-        /// The number of items in the grocery list.
+        /// The work item currently in progress
         /// </summary>
+        public WorkItem ActiveItem { get; set; }
 
+        /// <summary>
+        /// The number of items in the workitem list.
+        /// </summary>
         public int ItemCount
         {
             get { return p_ItemCount; }

@@ -23,5 +23,16 @@ namespace WorkTimeLogger
         {
             m_ViewModel = (MainWindowViewModel)this.DataContext;
         }
+        
+        /// <summary>
+        /// Closing event handler canceling the actual event for later usage of the same window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Visibility = System.Windows.Visibility.Hidden;
+        }
     }
 }

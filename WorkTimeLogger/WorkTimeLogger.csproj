@@ -28,7 +28,7 @@
     <ProductName>WorkTimeLogger</ProductName>
     <PublisherName>dhonved</PublisherName>
     <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>

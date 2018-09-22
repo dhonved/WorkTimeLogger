@@ -24,6 +24,7 @@ namespace WorkTimeLogger
                     CommandAction = () =>
                     {
                         Application.Current.MainWindow.Visibility = System.Windows.Visibility.Visible;
+                        Application.Current.MainWindow.Activate();
                     }
                 };
             }

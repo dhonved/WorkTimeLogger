@@ -82,7 +82,7 @@
                     </Grid>
                 </ItemsPanelTemplate>
             </StatusBar.ItemsPanel>
-            <StatusBarItem Grid.Row="0" Grid.ColumnSpan="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <StatusBarItem Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -91,8 +91,8 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Number of items: " TextWrapping="NoWrap"/>
-                    <TextBlock Grid.Column="1" Text="{Binding ItemCount}" TextWrapping="Wrap"/>
+                    <TextBlock Grid.Column="0" Text="Total time spent: " TextWrapping="NoWrap"/>
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding TotalTimeSpent}" TextWrapping="Wrap" HorizontalAlignment="Right"/>
                 </Grid>
             </StatusBarItem>
             <StatusBarItem Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">

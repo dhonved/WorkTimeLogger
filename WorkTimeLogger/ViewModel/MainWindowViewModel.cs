@@ -13,7 +13,7 @@ namespace WorkTimeLogger
 
         // Property variables
         private ObservableCollection<WorkItem> p_WorkItemList;
-        private int p_ItemCount;
+        private TimeSpan p_TotalTimeSpent;
         private string p_StatusBarMessage;
 
         public DispatcherTimer dispatcherTimer = null;
@@ -75,16 +75,16 @@ namespace WorkTimeLogger
         public WorkItem ActiveItem { get; set; }
 
         /// <summary>
-        /// The number of items in the workitem list.
+        /// The total time spent on work items while the app is running
         /// </summary>
-        public int ItemCount
+        public TimeSpan TotalTimeSpent
         {
-            get { return p_ItemCount; }
+            get { return p_TotalTimeSpent; }
 
             set
             {
-                p_ItemCount = value;
-                base.RaisePropertyChangedEvent("ItemCount");
+                p_TotalTimeSpent = value;
+                base.RaisePropertyChangedEvent("TotalTimeSpent");
             }
         }
 
@@ -111,9 +111,6 @@ namespace WorkTimeLogger
         /// </summary>
         void OnWorkItemListChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            // Update item count
-            this.ItemCount = this.WorkItemList.Count;
-
             // Resequence list
             SequencingService.SetCollectionSequence(this.WorkItemList);
         }
@@ -127,6 +124,7 @@ namespace WorkTimeLogger
         {
             // Updating the active items time spent property
             ActiveItem.TimeSpent = ActiveItem.TimeSpent.Add(new TimeSpan(0, 0, 1));
+            TotalTimeSpent = TotalTimeSpent.Add(new TimeSpan(0, 0, 1));
         }
 
         #endregion

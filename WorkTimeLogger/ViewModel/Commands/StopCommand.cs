@@ -45,6 +45,7 @@ namespace WorkTimeLogger.ViewModel.Commands
         /// </summary>
         public void Execute(object parameter)
         {
+            m_ViewModel.TriggerLogging();
             m_ViewModel.ActiveItem = null;
             m_ViewModel.dispatcherTimer.Stop();
         }

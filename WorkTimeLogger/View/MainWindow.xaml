@@ -6,12 +6,14 @@
         xmlns:local="clr-namespace:WorkTimeLogger"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:conv="clr-namespace:WorkTimeLogger.Converters"
         mc:Ignorable="d"
         Title="WorkTimeLogger" Height="350" MinHeight="190" Width="525" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" WindowStyle="ToolWindow"
         Closing="Window_Closing">
 
     <Window.Resources>
-
+        <conv:WorkItemConverter x:Key="workItemConverter" />
+        
         <!-- DataGrid Background -->
         <LinearGradientBrush x:Key="BlueLightGradientBrush" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Offset="0" Color="#FFEAF3FF"/>
@@ -30,35 +32,9 @@
             <Setter Property="VerticalGridLinesBrush" Value="#FFD3D0" />
             <Setter Property="RowHeaderWidth" Value="0" />
         </Style>
-
-        <!--<Style TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                            <Grid>
-                                <Rectangle x:Name="background"
-                                   Fill="{TemplateBinding Background}"/>
-                                <ContentPresenter
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="background" Property="Opacity" Value="0.1"/>
-
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
     </Window.Resources>
 
     <DockPanel>
-        <!--<tb:TaskbarIcon x:Name="MyNotifyIcon" IconSource="/Resources/hourglass-not-done.ico" ToolTipText="{Binding TimeSpent}"  />-->
-        
         <DockPanel LastChildFill="False" DockPanel.Dock="Top" Margin="5,0,5,0">
             <TextBlock Text="Stories" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Cambria" FontSize="21.333">
                 <TextBlock.Foreground>
@@ -96,37 +72,7 @@
                 </Grid>
             </StatusBarItem>
             <StatusBarItem Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                <Button Command="{Binding StartWork}" Content="Start" ToolTip="Start the clock for the selected work item">
-                    <!--<Button.Style>
-                        <Style>
-                            <Setter Property="Button.Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border x:Name="Border" Background="MediumSeaGreen" Opacity="50">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsEnabled" Value="false">
-                                                <Setter TargetName="Border" Property="Background" Value="DarkSeaGreen">
-                                                    --><!--<Setter.Value>
-                                                        <LinearGradientBrush>
-                                                            <GradientStop Color="DarkSeaGreen" Offset="0.0" />
-                                                            <GradientStop Color="DarkSeaGreen" Offset="0.6" />
-                                                            <GradientStop Color="DarkSeaGreen" Offset="1.0" />
-                                                        </LinearGradientBrush>
-                                                    </Setter.Value>--><!--
-                                                </Setter>
-                                            </Trigger>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="Border" Property="Opacity" Value="20" />
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>-->
-                </Button>
+                <Button Command="{Binding StartWork}" Content="Start" ToolTip="Start the clock for the selected work item"></Button>
             </StatusBarItem>
             <StatusBarItem Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                 <Button Command="{Binding StopWork}" Content="Stop" ToolTip="Stop the clock"></Button>
@@ -135,7 +81,7 @@
 
         <DataGrid x:Name="MainGrid" 
                           ItemsSource="{Binding WorkItemList}" 
-                          SelectedItem="{Binding SelectedItem}" 
+                          SelectedItem="{Binding SelectedItem, Converter={StaticResource workItemConverter}}" 
                           AutoGenerateColumns="False" 
                           DockPanel.Dock="Top"
                           VerticalAlignment="Top"

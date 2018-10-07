@@ -4,6 +4,7 @@ using WorkTimeLogger.ViewModel.Services;
 using WorkTimeLogger.ViewModel.Commands;
 using System.Windows.Threading;
 using System;
+using System.Reflection;
 
 namespace WorkTimeLogger
 {
@@ -17,6 +18,8 @@ namespace WorkTimeLogger
         private string p_StatusBarMessage;
 
         public DispatcherTimer dispatcherTimer = null;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("WorkTimeLogger");
 
         #endregion
 
@@ -111,8 +114,7 @@ namespace WorkTimeLogger
         /// </summary>
         void OnWorkItemListChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            // Resequence list
-            SequencingService.SetCollectionSequence(this.WorkItemList);
+            
         }
 
         /// <summary>
@@ -125,6 +127,14 @@ namespace WorkTimeLogger
             // Updating the active items time spent property
             ActiveItem.TimeSpent = ActiveItem.TimeSpent.Add(new TimeSpan(0, 0, 1));
             TotalTimeSpent = TotalTimeSpent.Add(new TimeSpan(0, 0, 1));
+        }
+
+        /// <summary>
+        /// Triggers logging service to put time spent values into the log file
+        /// </summary>
+        public void TriggerLogging()
+        {
+            LoggingService.LogWorkItems(this.WorkItemList);
         }
 
         #endregion
@@ -146,17 +156,14 @@ namespace WorkTimeLogger
             // Subscribe to CollectionChanged event
             p_WorkItemList.CollectionChanged += OnWorkItemListChanged;
 
-            // Add items to the list
-            p_WorkItemList.Add(new WorkItem("Macaroni"));
-            p_WorkItemList.Add(new WorkItem("Shredded Wheat"));
-            p_WorkItemList.Add(new WorkItem("Fish Filets"));
-            p_WorkItemList.Add(new WorkItem("Hamburger Buns"));
-            p_WorkItemList.Add(new WorkItem("Whipped Cream"));
-            p_WorkItemList.Add(new WorkItem("Soft Drinks"));
-            p_WorkItemList.Add(new WorkItem("Bread"));
+            // Loading work items from worktime log file
+            LoggingService.LoadWorkItems(this.WorkItemList);
 
-            // Initialize list index
-            this.WorkItemList = SequencingService.SetCollectionSequence(this.WorkItemList);
+            // Calculating already spent time on work items
+            foreach (WorkItem wItem in WorkItemList)
+            {
+                p_TotalTimeSpent += wItem.TimeSpent;
+            }
 
             // Update bindings
             base.RaisePropertyChangedEvent("WorkItemList");

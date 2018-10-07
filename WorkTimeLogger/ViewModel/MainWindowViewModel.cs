@@ -16,6 +16,7 @@ namespace WorkTimeLogger
         private ObservableCollection<WorkItem> p_WorkItemList;
         private TimeSpan p_TotalTimeSpent;
         private string p_StatusBarMessage;
+        private string p_WindowTitle;
 
         public DispatcherTimer dispatcherTimer = null;
 
@@ -105,6 +106,20 @@ namespace WorkTimeLogger
             }
         }
 
+        /// <summary>
+        /// The title of the main window.
+        /// </summary>
+        public string WindowTitle
+        {
+            get { return p_WindowTitle; }
+
+            set
+            {
+                p_WindowTitle = value;
+                base.RaisePropertyChangedEvent("WindowTitle");
+            }
+        }
+
         #endregion
 
         #region Event Handlers
@@ -164,6 +179,9 @@ namespace WorkTimeLogger
             {
                 p_TotalTimeSpent += wItem.TimeSpent;
             }
+
+            // Updating the window title
+            WindowTitle = "WorkTimeLogger v" + Assembly.GetExecutingAssembly().GetName().Version;
 
             // Update bindings
             base.RaisePropertyChangedEvent("WorkItemList");

@@ -8,7 +8,7 @@
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:conv="clr-namespace:WorkTimeLogger.Converters"
         mc:Ignorable="d"
-        Title="WorkTimeLogger" Height="350" MinHeight="190" Width="525" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" WindowStyle="ToolWindow"
+        Title="{Binding WindowTitle}" Height="350" MinHeight="190" Width="525" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" WindowStyle="ToolWindow"
         Closing="Window_Closing">
 
     <Window.Resources>

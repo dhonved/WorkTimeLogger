@@ -143,7 +143,7 @@ namespace WorkTimeLogger
             ActiveItem.TimeSpent = ActiveItem.TimeSpent.Add(new TimeSpan(0, 0, 1));
             TotalTimeSpent = TotalTimeSpent.Add(new TimeSpan(0, 0, 1));
         }
-
+        
         /// <summary>
         /// Triggers logging service to put time spent values into the log file
         /// </summary>
